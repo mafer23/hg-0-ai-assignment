@@ -1,0 +1,12 @@
+{
+    "manifest_version": 3,
+    "name":"prueba",
+    "version":"1.0",
+    "description": "Esta es una prueba para el aplicativo",
+    "icons":{
+        "128": "data.png"
+    },
+    "action":{
+        "default_ml": "index.html"
+    }
+}
