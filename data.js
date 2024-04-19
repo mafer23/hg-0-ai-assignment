@@ -1,9 +1,17 @@
-import {extract} from '@extractus/article-extractor'
+const { extract } = require('@extractus/article-extractor');
 
 
-const article = await extract('https://www.elespectador.com/colombia/mas-regiones/danos-por-derrumbes-quien-responde-article-28830/')
+// Tu código aquí
 
-console.log(article)
+
+const myFunction = async () => {
+const article = await extract('https://www.cnbc.com/2022/09/21/what-another-major-rate-hike-by-the-federal-reserve-means-to-you.html', {
+  descriptionLengthThreshold: 120,
+  contentLengthThreshold: 500
+})
+}
+
+myFunction();
 //const message = document.querySelector('h1')
 
 //const boton = document.querySelector('#change-message')
