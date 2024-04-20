@@ -1,17 +1,13 @@
-const { extract } = require('@extractus/article-extractor');
+import { extract } from '@extractus/article-extractor';
 
 
 // Tu código aquí
 
 
-const myFunction = async () => {
-const article = await extract('https://www.cnbc.com/2022/09/21/what-another-major-rate-hike-by-the-federal-reserve-means-to-you.html', {
-  descriptionLengthThreshold: 120,
-  contentLengthThreshold: 500
-})
-}
+const article = await extract('https://www.semana.com/')
 
-myFunction();
+
+console.log(article)
 //const message = document.querySelector('h1')
 
 //const boton = document.querySelector('#change-message')
