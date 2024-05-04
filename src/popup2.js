@@ -1,112 +1,49 @@
-'use strict';
+'use strict'
 
-import './popup.css';
+const json2md = require('json2md');
 
-(function () {
-  // We will make use of Storage API to get and store `count` value
-  // More information on Storage API can we found at
-  // https://developer.chrome.com/extensions/storage
-
-  // To get storage access, we have to mention it in `permissions` property of manifest.json file
-  // More information on Permissions can we found at
-  // https://developer.chrome.com/extensions/declare_permissions
-  const counterStorage = {
-    get: (cb) => {
-      chrome.storage.sync.get(['count'], (result) => {
-        cb(result.count);
-      });
-    },
-    set: (value, cb) => {
-      chrome.storage.sync.set(
-        {
-          count: value,
-        },
-        () => {
-          cb();
-        }
-      );
-    },
-  };
-
-  function setupCounter(initialValue = 0) {
-    document.getElementById('counter').innerHTML = initialValue;
-
-    document.getElementById('incrementBtn').addEventListener('click', () => {
-      updateCounter({
-        type: 'INCREMENT',
-      });
-    });
-
-    document.getElementById('decrementBtn').addEventListener('click', () => {
-      updateCounter({
-        type: 'DECREMENT',
-      });
-    });
+function convertirHTMLaObjetos(htmlString) {
+  // Crea un elemento temporal para contener el HTML
+  var tempElement = document.createElement('div');
+  tempElement.innerHTML = htmlString;
+  
+  // Obtiene todos los elementos hijos del elemento temporal
+  var children = tempElement.children;
+  
+  // Array para almacenar los objetos resultantes
+  var objetos = [];
+  
+  // Itera sobre los elementos hijos y crea objetos para cada uno
+  for (var i = 0; i < children.length; i++) {
+      var elemento = children[i];
+      var objeto = {};
+      
+      // Obtén el nombre de la etiqueta y su contenido
+      var tagName = elemento.tagName.toLowerCase();
+      var contenido = elemento.textContent.trim();
+      
+      // Añade el objeto al array
+      objeto[tagName] = contenido;
+      objetos.push(objeto);
   }
+  
+  return objetos;
+}
 
-  function updateCounter({ type }) {
-    counterStorage.get((count) => {
-      let newCount;
+document.addEventListener('DOMContentLoaded', function()
+{
+  let getUrlButton = document.getElementById('get-url-button');
+  getUrlButton.addEventListener('click', () => {
+    var htmlString = "<p>Hola esto es</p><h1>un texto equisdé</h1>";
+    var objetos = convertirHTMLaObjetos(htmlString);
+    console.log(objetos); // Mostrará [{p: "Hola esto es"}, {h1: "un texto equisdé"}]
+  });
+});
 
-      if (type === 'INCREMENT') {
-        newCount = count + 1;
-      } else if (type === 'DECREMENT') {
-        newCount = count - 1;
-      } else {
-        newCount = count;
-      }
 
-      counterStorage.set(newCount, () => {
-        document.getElementById('counter').innerHTML = newCount;
 
-        // Communicate with content script of
-        // active tab by sending a message
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-          const tab = tabs[0];
 
-          chrome.tabs.sendMessage(
-            tab.id,
-            {
-              type: 'COUNT',
-              payload: {
-                count: newCount,
-              },
-            },
-            (response) => {
-              console.log('Current count value passed to contentScript file');
-            }
-          );
-        });
-      });
-    });
-  }
+// const data = { domain: 'Hello, World!' }
+// const dataConverted = JSON.stringify(data);
 
-  function restoreCounter() {
-    // Restore count value
-    counterStorage.get((count) => {
-      if (typeof count === 'undefined') {
-        // Set counter value as 0
-        counterStorage.set(0, () => {
-          setupCounter(0);
-        });
-      } else {
-        setupCounter(count);
-      }
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', restoreCounter);
-
-  // Communicate with background file by sending a message
-  chrome.runtime.sendMessage(
-    {
-      type: 'GREETINGS',
-      payload: {
-        message: 'Hello, my name is Pop. I am from Popup.',
-      },
-    },
-    (response) => {
-      console.log(response.message);
-    }
-  );
-})();
+// console.log(json2md(dataConverted));
