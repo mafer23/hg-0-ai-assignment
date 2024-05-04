@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: h0mlapi
+  IMAGE_NAME: h0-ml-api
 
 jobs:
   build-and-push-image:
