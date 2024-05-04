@@ -51,6 +51,6 @@ jobs:
           # Run the new container with environment variables
           echo "Running container \$IMAGE"
 
-          sudo docker run -d -p 80:80
+          sudo docker run -d -p 80:80 $IMAGE
 
           EOF
