@@ -50,6 +50,6 @@ jobs:
           IMAGE_TAG: ${{ steps.commit.outputs.short }}
         uses: docker/build-push-action@v5
         with:
-          context: ../api/Dockerfile
+          context: ./api
           push: true
           tags: ${{ steps.meta.outputs.tags }}
