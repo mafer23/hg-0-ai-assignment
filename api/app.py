@@ -2,25 +2,38 @@ import pickle
 from fastapi import FastAPI
 import uvicorn
 
+# Load lnoobw
+with open('./data/lnoobw.txt', 'r') as f:
+  lnoobw = f.read().splitlines()
+
 # Load model
-def load_model():
-    with open('./modelo_sentimiento.pkl', 'rb') as f:
-        model = pickle.load(f)
-    return model
+with open('./modelo_sentimiento.pkl', 'rb') as f:
+    model = pickle.load(f)
 
-model = load_model()
 
-app = FastAPI()
 
+def contains_lnoobw(text, words):
+    for word in words:
+        if word in text:
+            return 0
+    return 1
+    
+   
+app     = FastAPI()
 
 @app.post('/predict')
 def predict(data):
-    example = ["I love this product"]
-    # View model atributtes
-    print(dir(model))
-    prediction = model.predict(example)
-    # print(prediction)
-    return {'prediction': str(prediction)}
+    suitable = 1
+    suitable = contains_lnoobw(data, lnoobw)
+
+    if suitable:
+        # prediction = model.predict([data])
+        # return {'prediction': prediction[0]}
+        print('Prediction')
+
+
+    
+    return {'prediction': suitable}
 
 
 if __name__ == '__main__':
