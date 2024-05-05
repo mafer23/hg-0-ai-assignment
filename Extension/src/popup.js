@@ -48,15 +48,59 @@ function convertHTMLToObjects(htmlString)
   return objetos;
 }
 
-function extract(url)
+async function fetchData(scrappedData)
 {
-  extractor.extractData(url, (err, data) =>
+  const postData = {
+    data: scrappedData
+  }
+
+  try 
+  {
+    const responseFetch = await fetch(`http://ec2-54-185-33-120.us-west-2.compute.amazonaws.com/predict?data=${postData.data}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(postData)
+    });
+
+    const data = await responseFetch.json();
+
+    return data;
+  }
+  catch (error) 
+  {
+    console.error('Error:', error);
+  }
+}
+
+function handleAlert(prediction)
+{
+  if (prediction) alert('Esta página es adecuada')
+  else alert('Esta página es inadecuada')
+}
+
+// Response = {prediction: }
+async function extract(url)
+{
+  extractor.extractData(url, async (err, data) =>
   {
     // console.log(data.content);
 
     const htmlString = JSON.stringify(data.content);
-    const objetos = convertHTMLToObjects(htmlString);
+    const objects = convertHTMLToObjects(htmlString);
     // console.log(objetos);
-    console.log(json2md(objetos));
+    // console.log(json2md(objetos));
+
+    try 
+    {
+      const result = await fetchData(json2md(objects));
+      console.log('Response:', result.prediction);
+      handleAlert(result.prediction);
+    } 
+    catch (error) 
+    {
+      console.error('Error:', error);
+    }
   });
 }
