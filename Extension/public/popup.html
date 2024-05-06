@@ -4,13 +4,52 @@
 <head>
   <meta charset="UTF-8" />
   <title>My Chrome Extension</title>
-  <link rel="stylesheet" href="popup.css" />
+  <link rel="stylesheet" href="../src/popup.css" />
 </head>
 
 <body>
-  <div class="button-container">
-    <button id="get-url-button"> Obtener URL </button>
+  <div class="container">
+    <h1> Web Guardian </h1>
+    
+    <p> Working to keep children safe! </p>
+    <span> Extension active! </span>
   </div>
+
+  <style>
+    body 
+    {
+      width: 350px;
+      height: 100px;
+      background-color: #CCA9DD;
+    }
+
+    .container 
+    {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    h1 
+    {
+      font-size: 2.5em;
+      color: #fff;
+    }
+
+    p 
+    {
+      font-size: 1rem;
+    }
+
+    span 
+    {
+      font-size: 1rem;
+      color: rgb(13, 139, 13);
+    }
+  </style>
+
 
   <script src="popup.js"></script>
 

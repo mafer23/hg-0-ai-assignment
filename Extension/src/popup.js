@@ -5,8 +5,8 @@ const json2md = require('json2md');
 
 document.addEventListener('DOMContentLoaded', function()
 {
-  let getUrlButton = document.getElementById('get-url-button');
-  getUrlButton.addEventListener('click', function()
+  // Wait 2 seconds before executing the main function
+  setTimeout(() => 
   {
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs)
     {
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function()
 
       extract(currentUrl);
     });
-  });
+  }, 2000);
 });
 
 function convertHTMLToObjects(htmlString) 
@@ -76,8 +76,12 @@ async function fetchData(scrappedData)
 
 function handleAlert(prediction)
 {
-  if (prediction) alert('Esta página es adecuada')
-  else alert('Esta página es inadecuada')
+  if (prediction) return
+  else 
+  {
+    // alert('Esta página es inadecuada')
+    chrome.tabs.update({url: chrome.runtime.getURL('blocked.html') });
+  }
 }
 
 // Response = {prediction: }
