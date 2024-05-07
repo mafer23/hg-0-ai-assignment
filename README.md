@@ -1,8 +1,8 @@
 # Instructions to upload and test in Chrome browser
 
  <!-- El siguiente código HTML insertará la imagen y establecerá su tamaño -->
-<img align='right'  src="" width="230" > 
 
+![Seleccionado mayo 07 2024 17:26:27](https://github.com/Jacobo0312/hg-0-ai-assignment/assets/39041288/56de5420-7961-4a17-9281-3c314acf22f2)
 
 
 ### Install the chrome extension cli to execute the app extension
