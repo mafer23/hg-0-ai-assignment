@@ -46,3 +46,5 @@ Or you can zip the `build` folder manually.
 - Make sure that the command `npm run watch` is running so all the changes are saved automatically
 - Look for **public/popup.html** to modify the estructure (like a ordinary html)
 - The **src/popup.js** and **src/popup.css** are for logic code and styles respectively (ignore the popup2.js it is a code example)
+
+
