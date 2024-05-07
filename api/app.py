@@ -1,4 +1,4 @@
-import pickle
+import joblib
 from fastapi import FastAPI
 import uvicorn
 
@@ -8,8 +8,7 @@ with open('./data/lnoobw.txt', 'r') as f:
 
 # Load model
 with open('./modelo_sentimiento.pkl', 'rb') as f:
-    model = pickle.load(f)
-
+    model = joblib.load(f)
 
 
 def contains_lnoobw(text, words):
@@ -27,12 +26,12 @@ def predict(data):
     suitable = contains_lnoobw(data, lnoobw)
 
     if suitable:
-        # prediction = model.predict([data])
-        # return {'prediction': prediction[0]}
-        print('Prediction')
-
-
-    
+        try:
+            prediction = model.predict(data)
+            suitable = prediction
+        except:
+            suitable = 1
+        
     return {'prediction': suitable}
 
 
