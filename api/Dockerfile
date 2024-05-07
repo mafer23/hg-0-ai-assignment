@@ -2,7 +2,7 @@ FROM python:3.9-slim
 
 WORKDIR /code
 
-RUN sudo apt-get install libgomp1
+RUN apt-get install libgomp1
 
 RUN pip install --upgrade pip 
 
