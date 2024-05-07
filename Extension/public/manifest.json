@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Scrapp Ext",
+  "name": "Web Guardian",
   "version": "0.1.0",
   "description": "My Chrome Extension",
   "icons": {
@@ -13,7 +13,7 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "Scrapp Ext",
+    "default_title": "Guardian Ext",
     "default_popup": "popup.html"
   },
   "permissions": [
@@ -30,6 +30,16 @@
       "js": [
         "contentScript.js"
       ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [ "blocked.html", "blocked.css" ],
+      "matches": [ "http://*/*", "https://*/*" ]
+    },
+    {
+      "resources": [ "popup.html", "popup.css" ],
+      "matches": [ "http://*/*", "https://*/*" ]
     }
   ]
 }
