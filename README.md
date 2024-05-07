@@ -1,8 +1,7 @@
 # Instructions to upload and test in Chrome browser
 
  <!-- El siguiente código HTML insertará la imagen y establecerá su tamaño -->
-<img align='right'  src="![Seleccionado mayo 07 2024 17:26:27](https://github.com/Jacobo0312/hg-0-ai-assignment/assets/39041288/87d319e1-3446-4c08-9e0c-1699f6b19605)
- " alt="octocat-1711722537085" width="230" > 
+<img align='right'  src="" width="230" > 
 
 
 
