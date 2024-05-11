@@ -47,4 +47,8 @@ Or you can zip the `build` folder manually.
 - Look for **public/popup.html** to modify the estructure (like a ordinary html)
 - The **src/popup.js** and **src/popup.css** are for logic code and styles respectively (ignore the popup2.js it is a code example)
 
+  Presentation:
+  https://www.canva.com/design/DAGEgkwWkVs/svkIGt2O5U20TtzZwGC5NA/view?utm_content=DA[…]kVs&utm_campaign=designshare&utm_medium=link&utm_source=editor
+
+
 
